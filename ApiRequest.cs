@@ -1,5 +1,6 @@
-using RestSharp;
-using RestSharp.Authenticators;
+using System;
+using HttpRequestHeader;
+
 
 class StopParameter {
 	public string nameDm = "7.637305:51.951101:WGS84[DD.DDDDD]";
@@ -13,7 +14,7 @@ class DisplayParameter {
 	public string changeSpeed = "normal";
     public string nameDm = "7.637305:51.951101:WGS84[DD.DDDDD]";
 	public string typeDm = "coord";
-	public string useRealtime = "1"
+	public string useRealtime = "1";
 	public string coordListOutputFormat = "STRING";
 	public string canChangeMOT = "0";
 	public string sessionID = "0";
@@ -31,7 +32,6 @@ class DisplayParameter {
     public string mergeDep = "1";
     public string lineRestriction = "400";
     public string depType = "stopEvents";
-    //public string ptOptionsActive = "1";
     public string trlTMOTvalue100 = "15";
     public string coordOutputFormat = "WGS84[DD.DDDDD]";
     public string locationServerActive = "1";
@@ -43,7 +43,7 @@ class EfaApi {
 		using (var webClient = new System.Net.WebClient()) {
 
 			webClient.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
-    		string HtmlResult = wc.UploadString(URI, myParameters);
+    		string HtmlResult = webClient.UploadString(URI, myParameters);
 
     		// Define parameters
     		var request_param = new System.Collections.Specialized.NameValueCollection();
@@ -70,31 +70,31 @@ class EfaApi {
 		    reqparm.Add("coordOutputFormatTail", stopParameter.coordOutputFormatTail);
 		    reqparm.Add("outputFormat", stopParameter.outputFormat);
 		    reqparm.Add("coordOutputFormat", stopParameter.coordOutputFormat);
-		    reqparm.Add("changeSpeed",normal ;
-		    reqparm.Add("nameDm",7.637305:51.951101:WGS84[DD.DDDDD];
-			reqparm.Add("typeDm",coord;
-			reqparm.Add("useRealtime",1
-			reqparm.Add("coordListOutputFormat",STRING;
-			reqparm.Add("canChangeMOT",0;
-			reqparm.Add("sessionID",0;
-			reqparm.Add("itOptionsActive",1;
-		    reqparm.Add("coordOutputFormatTail",5;
-		    reqparm.Add("mode",direct;
-		    reqparm.Add("useAllStops",1;
-		    reqparm.Add("imparedOptionsActive",1;
-		    reqparm.Add("maxTimeLoop",1;
-		    reqparm.Add("includeCompleteStopSeq",1;
-		    reqparm.Add("useProxFootSearch",1;
-		    reqparm.Add("stateless",1;
-		    reqparm.Add("outputFormat",JSON;
-		    reqparm.Add("excludedMeans",checkbox;
-		    reqparm.Add("mergeDep",1;
-		    reqparm.Add("lineRestriction",400;
-		    reqparm.Add("depType",stopEvents;
-		    //reqparm.Add("ptOptionsActive",1;
-		    reqparm.Add("trlTMOTvalue100",15;
-		    reqparm.Add("coordOutputFormat",WGS84[DD.DDDDD];
-		    reqparm.Add("locationServerActive",1;
+		    reqparm.Add("changeSpeed",normal );
+		    reqparm.Add("nameDm","7.637305:51.951101:WGS84[DD.DDDDD]");
+			reqparm.Add("typeDm","coord");
+			reqparm.Add("useRealtime","1");
+			reqparm.Add("coordListOutputFormat","STRING");
+			reqparm.Add("canChangeMOT","0");
+			reqparm.Add("sessionID","0");
+			reqparm.Add("itOptionsActive","1");
+		    reqparm.Add("coordOutputFormatTail","5");
+		    reqparm.Add("mode","direct");
+		    reqparm.Add("useAllStops","1");
+		    reqparm.Add("imparedOptionsActive","1");
+		    reqparm.Add("maxTimeLoop","1");
+		    reqparm.Add("includeCompleteStopSeq","1");
+		    reqparm.Add("useProxFootSearch","1");
+		    reqparm.Add("stateless","1");
+		    reqparm.Add("outputFormat","JSON");
+		    reqparm.Add("excludedMeans","checkbox");
+		    reqparm.Add("mergeDep","1");
+		    reqparm.Add("lineRestriction","400");
+		    reqparm.Add("depType","stopEvents");
+		    //reqparm.Add("ptOptionsActive","1;
+		    reqparm.Add("trlTMOTvalue100","15");
+		    reqparm.Add("coordOutputFormat","WGS84[DD.DDDDD]");
+		    reqparm.Add("locationServerActive","1");
 		    
 		    //Second request
 		    webClient.UploadValues("http://app.vrr.de/msapp/XML_DM_REQUEST", "POST", request_param_2);
@@ -105,20 +105,8 @@ class EfaApi {
 
 			Newtonsoft.Json.Linq.JObject o = Newtonsoft.Json.Linq.JObject.Parse(json);
 
-			var stops = json["dm"][|"itdOdvAssignedStops"]
-
-			client.Execute(request);
+			var stops = json["dm"]["itdOdvAssignedStops"];
 		}
 	}
 
 }
-
-var client = new RestClient("http://example.com");
-
-var request = new RestRequest("resource/{id}", Method.POST);
-
-request.AddUrlSegment("id", "123"); // replaces matching token in request.Resource
-
-// execute the request and automatically deserialize result
-// return content type is sniffed but can be explicitly set via RestClient.AddHandler();
-RestResponse<Person> response = client.Execute<Person>(request);
