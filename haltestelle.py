@@ -49,10 +49,9 @@ def get_closest_stop(params):
     # Identify closest stop to current location
     stops = res['dm']['itdOdvAssignedStops']
     closest_stop = min(stops, key=lambda stp: stp['distance'])
-    logging.info("Closest stop for ")
     stop_id = closest_stop['stopID']
 
-    logging.info("Selected closest stop {} with ID {}".format('nameWO', stop_id))
+    logging.info("Selected closest stop {} with ID {}".format(closest_stop['name'], stop_id))
 
     return stop_id
 
@@ -63,24 +62,30 @@ def get_display_params(params, closest_stop_id):
 
     departures = r['departureList']
 
-    display = []
+    infos = []
     for line in departures:
         try:
-            display.append(line['realDateTime'])
-            # del display['year']
-            # del display['month']
+            try:
+                displayed = {"countdown": line['countdown']}
+            except KeyError as e:
+                displayed = {
+                    "day": line['realDateTime']['day'],
+                    "hour": line['realDateTime']['hour'],
+                    "minute": line['realDateTime']['minute']
+                }
 
             serving_line = line['servingLine']
-            display[-1].update(
-                {"destination": serving_line['direction'],
-                 "line": serving_line['number'],
-                 "direction": serving_line['liErgRiProj']['direction'],
-                 "countdown": line['countdown']
+
+            displayed.update({
+                    "destination": serving_line['direction'],
+                    "line": serving_line['number'],
+                    "direction": serving_line['liErgRiProj']['direction']
                  })
+            infos.append(displayed)
         except KeyError as e:
             logging.warning('Date {} could not be parsed'.format(line['stopName']))
 
-    return display
+    return infos
 
 
 if __name__ == '__main__':
