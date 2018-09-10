@@ -3,5 +3,5 @@ pandas
 scikit-learn
 matplotlib
 requests
-BeautifulSoup
+beautifulsoup4
 bookbook
