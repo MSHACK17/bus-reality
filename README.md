@@ -7,6 +7,7 @@ Go to [127.0.0.1:8888](127.0.0.1:8888) and enter the token from the console.
 All the notebooks should be ready to be executed in Jupyter lab.
 
 ## Installing dependencies
+Instead of a running the notebook on a Docker image, you can install the necessary packages via pip.
 
     $ pip install -r requirements.txt
     
