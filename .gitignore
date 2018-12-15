@@ -105,3 +105,6 @@ ENV/
 
 # pickle files
 *.pickle
+
+# CSV files
+*.csv
