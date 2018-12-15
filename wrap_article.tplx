@@ -1,5 +1,18 @@
 ((*- extends 'article.tplx' -*))
 
+((* block title *))
+\title{Machine Learning and Bus Delay Prediction}
+((* endblock title *))
+
+((* block author *))
+\author{Communitelligence GbR}
+((* endblock author *))
+
+((* block predoc *))
+    ((( super() )))
+    ((* block tableofcontents *))\tableofcontents((* endblock tableofcontents *))
+((* endblock predoc *))
+
 %===============================================================================
 % Input
 %===============================================================================
