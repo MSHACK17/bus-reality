@@ -30,6 +30,7 @@
     \usepackage{float}
     \floatplacement{figure}{H}
 
+    \usepackage{float}      % to set figure positions
     \usepackage{adjustbox} % Used to constrain images to a maximum size 
     \usepackage{xcolor} % Allow colors to be defined
     \usepackage{enumerate} % Needed for markdown enumerations to work
