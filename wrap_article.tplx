@@ -26,6 +26,9 @@
     \usepackage{caption}
     \DeclareCaptionLabelFormat{nolabel}{}
     \captionsetup{labelformat=nolabel}
+    
+    \usepackage{float}
+    \floatplacement{figure}{H}
 
     \usepackage{adjustbox} % Used to constrain images to a maximum size 
     \usepackage{xcolor} % Allow colors to be defined
